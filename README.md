@@ -1,5 +1,12 @@
 # Poker Stats Server
 
+### Setup
+
+1. You must have node and mysql installed locally before running this server
+2. Create a new database named "pokerdb"
+3. Create a new user named "pokerdb" with password "password"
+4. npm install
+
 ### `npm run dev`
 
 Runs the server in development mode.<br>
