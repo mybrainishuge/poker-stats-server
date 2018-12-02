@@ -9,10 +9,9 @@ const {
 module.exports = () => {
   const connection = mysql.createConnection({
     host: 'localhost',
-    // get user, password, and database from environment
-    user: 'pokeruser',
-    password: 'password',
-    database: 'pokerdb',
+    user: process.env.POKER_USER || 'pokeruser',
+    password: process.env.POKER_PASSWORD || 'password',
+    database: process.env.POKER_DATABASE || 'pokerdb',
   });
 
   connection.connect(err => {

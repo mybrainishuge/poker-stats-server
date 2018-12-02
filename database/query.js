@@ -34,7 +34,7 @@ const insertIntoPlayer = `
 `;
 
 const selectAllPlayers = `
-  SELECT p.id, p.first, p.last, p.winnings, c.alpha3code AS country
+  SELECT p.id, p.first, p.last, p.winnings, c.alpha3code AS country, c.alpha2code
   FROM PLAYER p
   JOIN COUNTRY c ON (p.country_id = c.id)
 `;

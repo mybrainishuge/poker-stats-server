@@ -1,4 +1,6 @@
-require('dotenv').load();
+const env = require('dotenv').config();
+
+if (env.error) throw env.error;
 
 const express = require('express');
 const cors = require('cors');
@@ -8,7 +10,7 @@ const { selectAllPlayers } = require('./database/query.js');
 const { decoratePlayersWithAvatars } = require('./helper.js');
 
 const server = express();
-const port = /* process.env.PORT || */ 3333;
+const port = env.parsed.PORT || 3333;
 
 server.use(cors());
 const db = initializeDatabase();
