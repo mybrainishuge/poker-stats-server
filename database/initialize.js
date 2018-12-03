@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+const players = require('./data/players.js');
 const {
   createTableCountry,
   createTablePlayer,
@@ -38,7 +39,7 @@ module.exports = () => {
       console.log('Table "player"  -> exists');
     });
 
-    connection.query(insertIntoPlayer, (err, result) => {
+    connection.query(insertIntoPlayer, [players], (err, result) => {
       if (err) throw err;
       console.log(`Table "player"  -> ${result.affectedRows} new records added`);
     });

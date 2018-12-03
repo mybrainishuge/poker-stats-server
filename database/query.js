@@ -29,8 +29,7 @@ const createTablePlayer = `
 const insertIntoPlayer = `
   INSERT IGNORE INTO player
     (first, last, winnings, country_id)
-  VALUES
-    ${players}
+  VALUES ?
 `;
 
 const selectAllPlayers = `

@@ -5,9 +5,13 @@ if (env.error) throw env.error;
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const initializeDatabase = require('./database/initialize.js');
-const { selectPlayer, selectAllPlayers, updatePlayerWinnings } = require('./database/query.js');
+const {
+  insertIntoPlayer,
+  selectPlayer,
+  selectAllPlayers,
+  updatePlayerWinnings,
+} = require('./database/query.js');
 const { decorateAndSortPlayers } = require('./helper.js');
 
 const server = express();
@@ -19,8 +23,6 @@ server.use(bodyParser.json());
 
 const db = initializeDatabase();
 
-server.get('/', (req, res) => res.send('Hello World!'));
-
 server.get('/players', (req, res) => {
   db.query(selectAllPlayers, (err, result) => {
     if (err) throw err;
@@ -28,7 +30,20 @@ server.get('/players', (req, res) => {
   });
 });
 
-server.post('/add', (req, res) => res.send('player added'));
+server.post('/add', (req, res) => {
+  const { country, first, last, winnings } = req.body;
+  const data = [[first, last, winnings, country]];
+
+  db.query(insertIntoPlayer, [data], (err, result) => {
+    if (err) throw err;
+
+    db.query(selectAllPlayers, (err, result) => {
+      if (err) throw err;
+      res.send(decorateAndSortPlayers(result));
+    });
+  });
+});
+
 server.patch('/update', (req, res) => {
   const { id, value } = req.body;
 
