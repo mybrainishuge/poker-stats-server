@@ -16,7 +16,8 @@ const getAvatarUrl = (first, last) =>
   cloudinary.url(`avatar/${normalizeName(first, last)}.jpg`, {
     aspect_ratio: '1:1',
     crop: 'fill',
-    gravity: 'face:auto',
+    flags: 'preserve_transparency',
+    gravity: 'auto:face',
     quality: 100,
     radius: 'max',
     secure: true,
@@ -29,11 +30,13 @@ const currency = new Intl.NumberFormat('en-US', {
   minimumFractionDigits: 2,
 });
 
-const decoratePlayersWithAvatars = players =>
-  players.map(player => {
-    player.avatar = getAvatarUrl(player.first, player.last);
-    player.winnings = currency.format(player.winnings);
-    return player;
-  });
+const decorateAndSortPlayers = players =>
+  players
+    .sort((a, b) => b.winnings - a.winnings)
+    .map(player => {
+      player.avatar = getAvatarUrl(player.first, player.last);
+      player.winnings = currency.format(player.winnings);
+      return player;
+    });
 
-module.exports = { decoratePlayersWithAvatars };
+module.exports = { decorateAndSortPlayers };

@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const initializeDatabase = require('./database/initialize.js');
 const { selectAllPlayers } = require('./database/query.js');
-const { decoratePlayersWithAvatars } = require('./helper.js');
+const { decorateAndSortPlayers } = require('./helper.js');
 
 const server = express();
 const port = env.parsed.PORT || 3333;
@@ -20,7 +20,7 @@ server.get('/', (req, res) => res.send('Hello World!'));
 server.get('/players', (req, res) => {
   db.query(selectAllPlayers, (err, result) => {
     if (err) throw err;
-    res.send(decoratePlayersWithAvatars(result));
+    res.send(decorateAndSortPlayers(result));
   });
 });
 

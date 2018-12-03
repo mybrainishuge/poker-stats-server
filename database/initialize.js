@@ -8,7 +8,7 @@ const {
 
 module.exports = () => {
   const connection = mysql.createConnection({
-    host: 'localhost',
+    host: process.env.POKER_HOST || 'localhost',
     user: process.env.POKER_USER || 'pokeruser',
     password: process.env.POKER_PASSWORD || 'password',
     database: process.env.POKER_DATABASE || 'pokerdb',
