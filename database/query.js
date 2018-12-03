@@ -35,8 +35,20 @@ const insertIntoPlayer = `
 
 const selectAllPlayers = `
   SELECT p.id, p.first, p.last, p.winnings, c.alpha3code AS country, c.alpha2code
-  FROM PLAYER p
+  FROM player p
   JOIN COUNTRY c ON (p.country_id = c.id)
+`;
+
+const selectPlayer = `
+  SELECT id, first, last, winnings
+  FROM player
+  WHERE id = ?
+`;
+
+const updatePlayerWinnings = `
+  UPDATE player
+  SET winnings = ?
+  WHERE id = ?
 `;
 
 module.exports = {
@@ -45,4 +57,6 @@ module.exports = {
   insertIntoCountry,
   insertIntoPlayer,
   selectAllPlayers,
+  selectPlayer,
+  updatePlayerWinnings,
 };
