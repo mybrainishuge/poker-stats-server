@@ -1,11 +1,36 @@
 # Poker Stats Server
 
-### Setup
+### `Setup`
 
-1. You must have node and mysql installed locally before running this server
-2. Create a new database named "pokerdb"
-3. Create a new user named "pokerdb" with password "password"
-4. npm install
+1. Install node and mysql locally
+
+```sh
+$ brew install node mysql
+```
+
+2. Create database named "pokerdb"
+
+```sh
+$ mysql -u root -p
+mysql> CREATE DATABASE pokerdb;
+```
+
+3. Create user named "pokerdb" with password "password"
+
+```sh
+mysql> CREATE USER 'pokeruser'@'localhost' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON pokerdb.* TO 'pokeruser'@'localhost';
+mysql> quit
+```
+
+4. Install dependences
+
+```sh
+$ npm install
+```
+
+5. Create `.env` file using `.env.example`
+   - Requires valid Cloudinary API key and secret
 
 ### `npm run dev`
 
