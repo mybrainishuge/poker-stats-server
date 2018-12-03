@@ -43,3 +43,8 @@ The server will reload if you make edits.<br>
 
 Launches the test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### To Do
+
+- Add better error handling
+- Write tests
