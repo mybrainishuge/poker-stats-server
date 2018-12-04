@@ -9,6 +9,7 @@ const initializeDatabase = require('./database/initialize.js');
 const {
   insertIntoPlayer,
   selectPlayer,
+  selectAllCountries,
   selectAllPlayers,
   updatePlayerWinnings,
 } = require('./database/query.js');
@@ -27,6 +28,13 @@ server.get('/players', (req, res) => {
   db.query(selectAllPlayers, (err, result) => {
     if (err) throw err;
     res.send(decorateAndSortPlayers(result));
+  });
+});
+
+server.get('/countries', (req, res) => {
+  db.query(selectAllCountries, (err, result) => {
+    if (err) throw err;
+    res.send(result);
   });
 });
 

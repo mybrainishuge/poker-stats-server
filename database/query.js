@@ -38,6 +38,11 @@ const selectAllPlayers = `
   JOIN COUNTRY c ON (p.country_id = c.id)
 `;
 
+const selectAllCountries = `
+  SELECT id, name
+  FROM country
+`;
+
 const selectPlayer = `
   SELECT id, first, last, winnings
   FROM player
@@ -55,6 +60,7 @@ module.exports = {
   createTablePlayer,
   insertIntoCountry,
   insertIntoPlayer,
+  selectAllCountries,
   selectAllPlayers,
   selectPlayer,
   updatePlayerWinnings,
